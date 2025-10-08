@@ -3,3 +3,4 @@ pysrt
 pydub
 requests
 gradio_client
+gunicorn
