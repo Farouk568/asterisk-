@@ -5,5 +5,5 @@ requests
 gradio_client
 gunicorn
 
-pyaudioop
 ffmpeg-python
+
