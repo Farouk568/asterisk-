@@ -1,14 +1,17 @@
-# استخدم نسخة Python 3.11
+# ✅ استخدم Python 3.11 بدل 3.13
 FROM python:3.11-slim
 
-# اجعل مجلد العمل هو /app
+# تثبيت ffmpeg و git
+RUN apt-get update && apt-get install -y ffmpeg git && rm -rf /var/lib/apt/lists/*
+
+# تعيين مجلد العمل
 WORKDIR /app
 
-# انسخ كل الملفات إلى الحاوية
+# نسخ الملفات
 COPY . .
 
-# ثبّت التبعيات
+# تثبيت المتطلبات
 RUN pip install --no-cache-dir -r requirements.txt
 
-# شغّل السيرفر
-CMD ["python", "api_server.py"]
+# تعيين الأمر الافتراضي لتشغيل السيرفر
+CMD ["gunicorn", "api_server:app", "--timeout", "120", "--workers", "2"]
