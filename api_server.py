@@ -109,7 +109,7 @@ def generate_audio_endpoint():
     voice_cycle = [male_voices[i % len(male_voices)] if i % 2 == 0 else female_voices[i % len(female_voices)] for i in range(len(subs))]
     
     print(f"🚀 بدء العمل بالتوازي (حتى 8 عمال)...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         futures = {executor.submit(process_line, i, sub, voice_cycle[i], job_dir): i for i, sub in enumerate(subs)}
         future_results = [None] * len(subs)
         for future in concurrent.futures.as_completed(futures):
@@ -131,3 +131,4 @@ def serve_audio(job_id, filename):
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+
