@@ -1,12 +1,6 @@
 services:
   - type: web
     name: asterisk-
-    env: python
+    env: docker
     plan: free
-    buildCommand: |
-      apt-get update && apt-get install -y ffmpeg
-      pip install -r requirements.txt
-    startCommand: "gunicorn api_server:app"
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
+    dockerfilePath: ./Dockerfile
