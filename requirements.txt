@@ -1,0 +1,5 @@
+Flask
+pysrt
+pydub
+requests
+gradio_client
